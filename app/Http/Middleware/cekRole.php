@@ -15,6 +15,7 @@ class cekRole
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
+        // cek role
         if(in_array($request->user()->role->role, $roles)){
             return $next($request);
         }

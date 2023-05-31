@@ -39,10 +39,12 @@ class KegiatanController extends Controller
             'kegiatan.*.hasil'=> 'required',
         ]);
 
+        // membuat data komputer
         $komputer = Komputer::create($req['komputer']);
         $results = []; 
         $componens = [];
 
+        // membuat multiple input
         foreach($req->componen as $key => $value) {
             $value['komputer_id'] = $komputer->id;
             $resultComp = Componen::create($value);

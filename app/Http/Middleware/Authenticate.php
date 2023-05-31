@@ -17,7 +17,7 @@ class Authenticate extends Middleware
 
         return $request->expectsJson() ? null : route('login');
     }
-
+    // membuat session
     public function handle($request, Closure $next, ...$guards) {
         if(Auth::guard($guards)->check()) {
             return $next($request);

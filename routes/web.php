@@ -38,7 +38,7 @@ Route::get('/landingpage', [LoginController::class, 'landingpage']);
 
 
 
-
+// membuat middleware dan multi auth
 Route::middleware(['web', 'auth', 'cekRole:admin'])->group(function () {
     Route::get('/daftar_pc', [KomputerController::class, 'index']);
     Route::get('/', [ComponenController::class, 'index']);
