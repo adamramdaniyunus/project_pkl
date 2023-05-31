@@ -32,17 +32,15 @@ Route::put('/komputer/update/{id}', [KomputerController::class, 'update'])->name
 Route::put('/user/edit/{id}', [UserController::class, 'update'])->name('edit_user');
 Route::post('/create-data', [KegiatanController::class, 'create'])->name('create');
 Route::get('/delete-data', [KegiatanController::class, 'destroy'])->name('delete');
-
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/landingpage', [LoginController::class, 'landingpage']);
 
 
 
-// membuat middleware dan multi auth
-Route::middleware(['web', 'auth', 'cekRole:admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
+    Route::get('/register', [LoginController::class, 'register']);
     Route::get('/daftar_pc', [KomputerController::class, 'index']);
     Route::get('/', [ComponenController::class, 'index']);
-    Route::get('/register', [LoginController::class, 'register']);
     Route::get('/profile', [UserController::class, 'index']);
     Route::get('/edit-password/{id}', [UserController::class, 'edit']);
     Route::get('/add-kegiatan', [KegiatanController::class, 'index']);
@@ -52,9 +50,9 @@ Route::middleware(['web', 'auth', 'cekRole:admin'])->group(function () {
 });
 
 
-Route::middleware(['web', 'auth', 'cekRole:user'])->group(function () {
-    Route::get('/daftar_pc', [KomputerController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
     Route::get('/', [ComponenController::class, 'index']);
+    Route::get('/daftar_pc', [KomputerController::class, 'index']);
     Route::get('/profile', [UserController::class, 'index']);
     Route::get('/edit-password/{id}', [UserController::class, 'edit']);
     Route::get('/add-kegiatan', [KegiatanController::class, 'index']);
