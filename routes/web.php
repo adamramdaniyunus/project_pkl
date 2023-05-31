@@ -34,34 +34,33 @@ Route::post('/create-data', [KegiatanController::class, 'create'])->name('create
 Route::get('/delete-data', [KegiatanController::class, 'destroy'])->name('delete');
 
 Route::get('/login', [LoginController::class, 'index']);
-// Route::get('detail/{id}', function() {
-//     $pdf = Pdf::loadView('read.index');
-//     return $pdf->download('read.index.pdf');
-// });
+Route::get('/landingpage', [LoginController::class, 'landingpage']);
 
 
 
-Route::group(['middleware' => ['web', 'cekRole:admin']], function () {
-    Route::get('/daftar_pc', [KomputerController::class, 'index'])->middleware('auth');
-    Route::get('/', [ComponenController::class, 'index'])->middleware('auth');
-    Route::get('/register', [LoginController::class, 'register'])->middleware('auth');
-    Route::get('/profile', [UserController::class, 'index'])->middleware('auth');
-    Route::get('/edit-password/{id}', [UserController::class, 'edit'])->middleware('auth');
-    Route::get('/add-kegiatan', [KegiatanController::class, 'index'])->middleware('auth');
-    Route::get('/detail/{id}', [MaintenanceController::class, 'index'])->middleware('auth');
-    Route::get('/export-pdf/{id}', [MaintenanceController::class, 'exportPDF'])->middleware('auth');
-    Route::get('/komputer/update/{id}/edit', [KomputerController::class, 'edit'])->name('komputer_edit')->middleware('auth');
+
+Route::middleware(['web', 'auth', 'cekRole:admin'])->group(function () {
+    Route::get('/daftar_pc', [KomputerController::class, 'index']);
+    Route::get('/', [ComponenController::class, 'index']);
+    Route::get('/register', [LoginController::class, 'register']);
+    Route::get('/profile', [UserController::class, 'index']);
+    Route::get('/edit-password/{id}', [UserController::class, 'edit']);
+    Route::get('/add-kegiatan', [KegiatanController::class, 'index']);
+    Route::get('/detail/{id}', [MaintenanceController::class, 'index']);
+    Route::get('/export-pdf/{id}', [MaintenanceController::class, 'exportPDF']);
+    Route::get('/komputer/update/{id}/edit', [KomputerController::class, 'edit'])->name('komputer_edit');
 });
 
-Route::group(['middleware' => ['web', 'cekRole:user']], function () {
-    Route::get('/daftar_pc', [KomputerController::class, 'index'])->middleware('auth');
-    Route::get('/', [ComponenController::class, 'index'])->middleware('auth');
-    Route::get('/profile', [UserController::class, 'index'])->middleware('auth');
-    Route::get('/edit-password/{id}', [UserController::class, 'edit'])->middleware('auth');
-    Route::get('/add-kegiatan', [KegiatanController::class, 'index'])->middleware('auth');
-    Route::get('/detail/{id}', [MaintenanceController::class, 'index'])->middleware('auth');
-    Route::get('/export-pdf/{id}', [MaintenanceController::class, 'exportPDF'])->middleware('auth');
-    Route::get('/komputer/update/{id}/edit', [KomputerController::class, 'edit'])->name('komputer_edit')->middleware('auth');
+
+Route::middleware(['web', 'auth', 'cekRole:user'])->group(function () {
+    Route::get('/daftar_pc', [KomputerController::class, 'index']);
+    Route::get('/', [ComponenController::class, 'index']);
+    Route::get('/profile', [UserController::class, 'index']);
+    Route::get('/edit-password/{id}', [UserController::class, 'edit']);
+    Route::get('/add-kegiatan', [KegiatanController::class, 'index']);
+    Route::get('/detail/{id}', [MaintenanceController::class, 'index']);
+    Route::get('/export-pdf/{id}', [MaintenanceController::class, 'exportPDF']);
+    Route::get('/komputer/update/{id}/edit', [KomputerController::class, 'edit'])->name('komputer_edit');
 });
 
 

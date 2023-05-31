@@ -16,6 +16,9 @@ class LoginController extends Controller
     public function index() {
         return view('authenticate.login');
     }
+    public function landingpage() {
+        return view('welcome');
+    }
 
     public function login(Request $req) {
         $login = $req->validate([
@@ -37,7 +40,7 @@ class LoginController extends Controller
         $req->session()->invalidate();
         $req->session()->regenerateToken();
 
-        return redirect('/login')->with('success','Berhasil Logout!');
+        return redirect('/landingpage');
     }
 
     public function register() {
