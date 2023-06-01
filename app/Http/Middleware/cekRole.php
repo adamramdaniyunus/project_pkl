@@ -13,10 +13,10 @@ class cekRole
     public function handle($request, Closure $next, ...$roles)
     {
         // cek role
-        // if(in_array($request->user()->role, $roles)){
-        //     return $next($request);
-        // }
-        // return redirect('/error');
+        if(in_array($request->user()->role->role, $roles)){
+            return $next($request);
+        }
+        return redirect('/error');
 
     }
 }

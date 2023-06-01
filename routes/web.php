@@ -37,7 +37,7 @@ Route::get('/landingpage', [LoginController::class, 'landingpage']);
 
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'cekRole:admin'])->group(function () {
     Route::get('/register', [LoginController::class, 'register']);
     Route::get('/daftar_pc', [KomputerController::class, 'index']);
     Route::get('/', [ComponenController::class, 'index']);

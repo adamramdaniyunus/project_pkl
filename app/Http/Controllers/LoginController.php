@@ -55,6 +55,6 @@ class LoginController extends Controller
         $user->role_id = $req->input('role');
         $user->save();
 
-        return redirect('/login')->with('success', 'Silahkan Login!');
+        return redirect('/')->with('success', 'Berhasil menambahkan User!');
     }
 }

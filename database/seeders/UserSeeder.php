@@ -16,7 +16,8 @@ class UserSeeder extends Seeder
         //
         User::create([
             'name'=>'ITStaff',
-            'password'=>bcrypt('1234567890'),   
+            'password'=>bcrypt('1234567890'),
+            'role_id'=> 1,   
         ]);
     }
 }
