@@ -15,12 +15,10 @@
 
                 <div class="list-group list-group-unbordered mb-3">
                     <b>PC yang sudah di cek</b> <a class="float-right">{{ $jumlahData }}</a>
-                </div>
-                @foreach($user as $u)           
+                </div>           
                     <div class="flex">
-                        <a href="{{url('edit-password/'.$u->id)}}" class="btn btn-primary"><b>Edit Password</b></a>
+                        <a href="{{url('edit-password/'.$user->id)}}" class="btn btn-primary"><b>Edit Password</b></a>
                     </div>
-                @endforeach
                
             </div>
         </div>

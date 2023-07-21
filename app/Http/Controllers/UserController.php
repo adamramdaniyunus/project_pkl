@@ -6,6 +6,7 @@ use App\Models\cr;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +19,8 @@ class UserController extends Controller
     {
         //
         $jumlahData = DB::table('komputers')->count();
-        $user = User::all();
+        $userId = Auth::user()->id;
+        $user = User::where('id', $userId)->first();
         return view('user.index', compact('jumlahData', 'user'));
     }
 
